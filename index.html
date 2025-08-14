@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True Life Family & Worship Ministries</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        overflow-x: hidden;
+    }
+    /* Sunset Horizon with River */
+    body {
+        background: linear-gradient(to bottom, #4b0082, #8b008b, #ff8c00, #ff4500);
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite;
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    header {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+    }
+    header h1 {
+        font-size: 2.5rem;
+        color: gold;
+        animation: glowText 3s infinite alternate;
+    }
+    @keyframes glowText {
+        from { text-shadow: 0 0 10px gold; }
+        to { text-shadow: 0 0 30px white; }
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        flex-wrap: wrap;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    nav a:hover {
+        color: gold;
+        transform: scale(1.1);
+    }
+    section {
+        padding: 2rem;
+        text-align: center;
+    }
+    .btn {
+        display: inline-block;
+        background: gold;
+        color: black;
+        padding: 0.8rem 1.5rem;
+        margin: 1rem;
+        border-radius: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: transform 0.3s;
+    }
+    .btn:hover {
+        transform: scale(1.1);
+        background: purple;
+        color: white;
+    }
+    /* Cross Glow Animation */
+    .cross {
+        position: fixed;
+        width: 20px;
+        height: 60px;
+        background: gold;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 15px gold;
+        animation: crossPulse 5s infinite alternate;
+        z-index: -1;
+    }
+    .cross:after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 20px;
+        background: gold;
+        top: 20px;
+        left: -20px;
+    }
+    @keyframes crossPulse {
+        0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
+        100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    }
+    iframe {
+        max-width: 100%;
+        border: none;
+    }
+    form input, form textarea {
+        width: 90%;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-radius: 5px;
+        border: none;
+    }
+    footer {
+        background: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+        font-size: 0.9rem;
+    }
+</style>
+</head>
+<body>
+
+<div class="cross"></div>
+
+<header>
+    <h1>True Life Family & Worship Ministries</h1>
+    <p><script>
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  function size(){canvas.width=innerWidth; canvas.height=innerHeight}
+  addEventListener('resize', size); size();
+
+  const particles = Array.from({length: 110}, () => ({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*2.2 + .6,
+    vx: (Math.random()-.5)*.5,
+    vy: (Math.random()-.5)*.5,
+    a: Math.random()*Math.PI*2
+  }));
+
+  (function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = 'rgba(255,215,0,0.85)';
+    for(const p of particles){
+      p.x += p.vx; p.y += p.vy; p.a += 0.008;
+      p.vx += Math.cos(p.a)*0.0004; p.vy += Math.sin(p.a)*0.0004;
+      if(p.x<0||p.x>canvas.width) p.vx*=-1;
+      if(p.y<0||p.y>canvas.height) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  })();
+
+  const scriptures = [
+    '"Where the Spirit of the Lord is, there is freedom." — 2 Corinthians 3:17',
+    '"The Lord is my shepherd; I shall not want." — Psalm 23:1',
+    '"For God so loved the world that He gave His only Son..." — John 3:16',
+    '"I can do all things through Christ who strengthens me." — Philippians 4:13',
+    '"Those who hope in the Lord will renew their strength." — Isaiah 40:31'
+  ];
+  let idx = 0;
+  const el = document.getElementById('scripture-text');
+  function setScripture(){ el.textContent = scriptures[idx]; idx = (idx+1)%scriptures.length; }
+  setScripture(); setInterval(setScripture, 6000);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+    </p>
+</header>
+
+<nav>
+    <a href="#donate">Donate</a>
+    <a href="#sermons">Sermons</a>
+    <a href="#live">Live</a>
+    <a href="#events">Events</a>
+    <a href="#prayer">Prayer Request</a>
+</nav>
+
+<section id="donate">
+    <h2>Donate / Tithes / Seed</h2>
+    <p>Your generosity helps us spread the Gospel.</p>
+    <a href="#" class="btn">Give Now</a>
+</section>
+
+<section id="sermons">
+    <h2>Past Video Sermons</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/example" allowfullscreen></iframe>
+</section>
+
+<section id="live">
+    <h2>Watch Live</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
+</section>
+
+<section id="events">
+    <h2>Upcoming Events</h2>
+    <p>Stay tuned for our next worship service, community outreach, and prayer meetings.</p>
+</section>
+
+<section id="prayer">
+    <h2>Prayer Request</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required><br>
+        <input type="email" placeholder="Your Email" required><br>
+        <textarea rows="5" placeholder="Your Prayer Request"></textarea><br>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 True Life Family & Worship Ministries | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
