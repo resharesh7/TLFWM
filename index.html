@@ -1,134 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>True Life Family & Worship Ministries</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>True Life Family and Ministries</title>
+<meta name="theme-color" content="#4B0082"/>
+
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', sans-serif;
-        color: white;
-        overflow-x: hidden;
+  :root{
+    --purple:#4B0082;
+    --gold:#FFD700;
+    --black:#000000;
+    --text:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow-x:hidden;background:var(--black);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+
+  /* === SKY + SUNSET HORIZON === */
+  .scene{
+    position:fixed; inset:0; z-index:-3;
+    background:
+      radial-gradient(1200px 500px at 50% 55%, rgba(255,215,0,0.3), transparent 60%),
+      linear-gradient(to top, #12061a 0%, #2a0d4b 35%, #6f2fc1 55%, #8b3bd1 65%, #ffb25e 82%, #ffd391 90%, #2a0d4b 100%);
+  }
+  .sun{
+    position:fixed; left:50%; top:54%;
+    width:34vmin; height:34vmin; transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 50% 50%, #fff4c1 0%, #ffd36b 40%, rgba(255,217,0,0.0) 70%);
+    mix-blend-mode:screen; opacity:.85; z-index:-2; filter:blur(1px);
+    animation:pulseSun 10s ease-in-out infinite;
+  }
+  @keyframes pulseSun{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.06)}}
+
+  /* === RIVER === */
+  .riverWrap{
+    position:fixed; left:0; right:0; bottom:0; height:45vh; z-index:-1; pointer-events:none;
+  }
+  svg#river{width:100%; height:100%; display:block}
+  .glint{
+    animation:glint 9s linear infinite;
+  }
+  @keyframes glint{
+    0%{transform:translateX(-110%)}
+    100%{transform:translateX(110%)}
+  }
+
+  /* === HEADER === */
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(0,0,0,.55); backdrop-filter:saturate(140%) blur(6px);
+    border-bottom:1px solid rgba(255,215,0,.25);
+  }
+  .bar{
+    max-width:1200px; margin:0 auto; padding:.9rem 1rem;
+    display:flex; align-items:center; gap:12px; justify-content:space-between;
+  }
+  .logo{
+    display:flex; align-items:center; gap:.75rem; font-weight:800; letter-spacing:.3px;
+    color:var(--gold); text-shadow:0 0 12px rgba(255,215,0,.35);
+  }
+  .logo .mark{
+    width:36px; height:36px; position:relative; filter:drop-shadow(0 0 10px rgba(255,215,0,.6));
+  }
+  .logo .mark::before,.logo .mark::after{
+    content:""; position:absolute; background:var(--gold); left:50%; top:50%; transform:translate(-50%,-50%);
+    border-radius:2px;
+  }
+  .logo .mark::before{width:24%; height:100%}
+  .logo .mark::after{width:100%; height:24%}
+  nav{display:flex; gap:.75rem; flex-wrap:wrap}
+  .btn{
+    appearance:none; border:none; cursor:pointer; font-weight:700;
+    padding:.7rem 1rem; border-radius:999px;
+    background:linear-gradient(135deg, #b066ff, var(--gold));
+    color:#1b1400; box-shadow:0 6px 22px rgba(255,215,0,.25), 0 0 8px rgba(176,102,255,.35);
+    transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+    text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(255,215,0,.35), 0 0 12px rgba(176,102,255,.45);}
+  .btn:active{transform:translateY(0)}
+  .btn--ghost{
+    background:rgba(255,255,255,.08);
+    color:#fff; border:1px solid rgba(255,255,255,.15);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+
+  /* === HERO === */
+  .hero{
+    max-width:1100px; margin: clamp(16px,2.5vw,32px) auto 0;
+    padding: clamp(16px,2.5vw,32px); text-align:center;
+  }
+  h1{
+    font-size:clamp(28px, 5vw, 56px);
+    margin:.2rem 0 .8rem; line-height:1.06;
+    color:#fff; 
+    text-shadow:0 0 16px rgba(139,59,209,.75);
+  }
+  .tag{
+    color:var(--gold);
+    font-weight:700; letter-spacing:.8px; text-transform:uppercase; font-size:.9rem;
+  }
+  .scripture{
+    max-width:900px; margin:1rem auto 1.25rem; font-size:clamp(16px,2.6vw,22px);
+    color:#ffeab0; text-shadow:0 0 10px rgba(176,102,255,.25);
+  }
+
+  /* Glowing Hero Image */
+  .hero-img-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 18px auto 8px;
+  }
+  .hero-img {
+    max-width: 100%;
+    width: 300px;
+    border-radius: 12px;
+    box-shadow:
+      0 0 20px rgba(255,215,0,0.5),
+      0 0 40px rgba(176,102,255,0.4);
+    animation: glowImage 3s ease-in-out infinite alternate;
+  }
+  @keyframes glowImage {
+    from {
+      box-shadow:
+        0 0 20px rgba(255,215,0,0.4),
+        0 0 40px rgba(176,102,255,0.3);
     }
-    /* Sunset Horizon with River */
-    body {
-        background: linear-gradient(to bottom, #4b0082, #8b008b, #ff8c00, #ff4500);
-        background-size: 400% 400%;
-        animation: gradientShift 20s ease infinite;
+    to {
+      box-shadow:
+        0 0 34px rgba(255,215,0,0.9),
+        0 0 60px rgba(176,102,255,0.6);
     }
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    header {
-        text-align: center;
-        padding: 2rem 1rem;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(4px);
-    }
-    header h1 {
-        font-size: 2.5rem;
-        color: gold;
-        animation: glowText 3s infinite alternate;
-    }
-    @keyframes glowText {
-        from { text-shadow: 0 0 10px gold; }
-        to { text-shadow: 0 0 30px white; }
-    }
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 1rem;
-        background-color: rgba(0, 0, 0, 0.8);
-        flex-wrap: wrap;
-    }
-    nav a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    nav a:hover {
-        color: gold;
-        transform: scale(1.1);
-    }
-    section {
-        padding: 2rem;
-        text-align: center;
-    }
-    .btn {
-        display: inline-block;
-        background: gold;
-        color: black;
-        padding: 0.8rem 1.5rem;
-        margin: 1rem;
-        border-radius: 25px;
-        font-weight: bold;
-        text-decoration: none;
-        transition: transform 0.3s;
-    }
-    .btn:hover {
-        transform: scale(1.1);
-        background: purple;
-        color: white;
-    }
-    /* Cross Glow Animation */
-    .cross {
-        position: fixed;
-        width: 20px;
-        height: 60px;
-        background: gold;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 0 15px gold;
-        animation: crossPulse 5s infinite alternate;
-        z-index: -1;
-    }
-    .cross:after {
-        content: "";
-        position: absolute;
-        width: 60px;
-        height: 20px;
-        background: gold;
-        top: 20px;
-        left: -20px;
-    }
-    @keyframes crossPulse {
-        0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
-        100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-    }
-    iframe {
-        max-width: 100%;
-        border: none;
-    }
-    form input, form textarea {
-        width: 90%;
-        padding: 0.5rem;
-        margin: 0.5rem 0;
-        border-radius: 5px;
-        border: none;
-    }
-    footer {
-        background: rgba(0, 0, 0, 0.7);
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-        font-size: 0.9rem;
-    }
+  }
+
+  /* === SECTIONS === */
+  section{
+    max-width:1100px; margin: 22px auto; padding: clamp(14px,2.5vw,24px);
+    background:linear-gradient(180deg, rgba(75,0,130,.62), rgba(0,0,0,.52));
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:16px; box-shadow:0 10px 36px rgba(0,0,0,.4);
+  }
+  section h2{
+    margin:.2rem 0 1rem; color:var(--gold); letter-spacing:.3px; text-shadow:0 0 10px rgba(176,102,255,.25);
+    font-size: clamp(20px, 3.4vw, 30px);
+  }
+  .grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:16px;
+  }
+  iframe{
+    width:100%; aspect-ratio:16/9; border:0; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.45);
+  }
+
+  /* LIVE badge */
+  .liveBadge{
+    display:inline-flex; align-items:center; gap:.5rem; font-weight:800; color:#fff;
+    background:linear-gradient(135deg, #ff0048, #ff7a00);
+    padding:.35rem .65rem; border-radius:999px; box-shadow:0 8px 24px rgba(255,80,80,.35);
+    animation:throb 1.4s ease-in-out infinite;
+  }
+  .dot{width:8px; height:8px; background:#fff; border-radius:50%; box-shadow:0 0 10px #fff}
+  @keyframes throb{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+  /* === GOLD PARTICLE SPARKLES === */
+  canvas#particles{position:fixed; inset:0; z-index:-2; pointer-events:none}
+
+  /* === FOOTER === */
+  footer{
+    text-align:center; color:#d6c9ff; opacity:.9; padding:28px 12px 60px;
+  }
+
+  @media (max-width: 900px){
+    .grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 
-<div class="cross"></div>
+<div class="scene" aria-hidden="true"></div>
+<div class="sun" aria-hidden="true"></div>
+
+<div class="riverWrap" aria-hidden="true">
+  <svg id="river" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="riverGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4b0b87"/>
+        <stop offset="35%" stop-color="#6f2fc1"/>
+        <stop offset="60%" stop-color="#8b3bd1"/>
+        <stop offset="85%" stop-color="#ffd36b"/>
+        <stop offset="100%" stop-color="#2a0d4b"/>
+      </linearGradient>
+      <linearGradient id="glintGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+        <stop offset="45%" stop-color="rgba(255,230,170,0.25)"/>
+        <stop offset="55%" stop-color="rgba(255,230,170,0.25)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </linearGradient>
+      <filter id="ripple" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.035" numOctaves="2" seed="7" stitchTiles="stitch" result="noise">
+          <animate attributeName="baseFrequency" dur="12s" values="0.015 0.030;0.010 0.020;0.018 0.040;0.015 0.035" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G">
+          <animate attributeName="scale" dur="9s" values="14;24;14" repeatCount="indefinite"/>
+        </feDisplacementMap>
+      </filter>
+    </defs>
+    <polygon filter="url(#ripple)" points="0,100 50,44 100,100" fill="url(#riverGradient)"/>
+    <g class="glint" transform="translate(-120,0)">
+      <rect x="0" y="40" width="120" height="60" fill="url(#glintGrad)" opacity="0.6"/>
+    </g>
+  </svg>
+</div>
+
+<canvas id="particles"></canvas>
 
 <header>
-    <h1>True Life Family & Worship Ministries</h1>
-    <p><script>
+  <div class="bar">
+    <div class="logo">
+      <span class="mark" aria-hidden="true"></span>
+      <span>True Life Family and Ministries</span>
+    </div>
+    <nav>
+      <a class="btn" href="#give">💛 Donate / Tithes / Seed</a>
+      <a class="btn btn--ghost" href="#live">📺 Watch Live</a>
+      <a class="btn btn--ghost" href="#sermons">▶️ Sermons</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="tag">Welcome Home</div>
+  <h1>Encounter Jesus. Embrace Family. Live the True Life.</h1>
+
+  <!-- New Glowing Hero Image -->
+  <div class="hero-img-wrap">
+    <img src="https://i.postimg.cc/B6Gn07gq/TLFWM.jpg" alt="True Life Family and Ministries" class="hero-img">
+  </div>
+
+  <p class="scripture" id="scripture-text"></p>
+  <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin-top:.8rem">
+    <a href="#give" class="btn">Give Now</a>
+    <a href="#live" class="btn btn--ghost">Join Live Stream</a>
+  </div>
+</section>
+
+<section id="live">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+    <h2>Live Service</h2>
+    <span class="liveBadge"><span class="dot"></span> LIVE</span>
+  </div>
+  <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
+</section>
+
+<section id="sermons">
+  <h2>Recent Sermons</h2>
+  <div class="grid">
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID_ONE" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID_TWO" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section id="give">
+  <h2>Give: Donate • Tithes • Seed</h2>
+  <p style="max-width:800px;margin:.25rem auto 1rem;">Your generosity fuels ministry, outreach, and transformed lives.</p>
+  <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap">
+    <a class="btn" href="https://your-stripe-donation-link.com" target="_blank">Give via Stripe</a>
+    <a class="btn btn--ghost" href="https://cash.app/$YourCashTag" target="_blank">Cash App</a>
+    <a class="btn btn--ghost" href="https://www.paypal.me/YourPayPal" target="_blank">PayPal</a>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> True Life Family and Ministries • “Where the Spirit of the Lord is, there is freedom.” — 2 Corinthians 3:17
+</footer>
+
+<script>
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
   function size(){canvas.width=innerWidth; canvas.height=innerHeight}
@@ -170,51 +315,6 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-    </p>
-</header>
-
-<nav>
-    <a href="#donate">Donate</a>
-    <a href="#sermons">Sermons</a>
-    <a href="#live">Live</a>
-    <a href="#events">Events</a>
-    <a href="#prayer">Prayer Request</a>
-</nav>
-
-<section id="donate">
-    <h2>Donate / Tithes / Seed</h2>
-    <p>Your generosity helps us spread the Gospel.</p>
-    <a href="#" class="btn">Give Now</a>
-</section>
-
-<section id="sermons">
-    <h2>Past Video Sermons</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/example" allowfullscreen></iframe>
-</section>
-
-<section id="live">
-    <h2>Watch Live</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" allowfullscreen></iframe>
-</section>
-
-<section id="events">
-    <h2>Upcoming Events</h2>
-    <p>Stay tuned for our next worship service, community outreach, and prayer meetings.</p>
-</section>
-
-<section id="prayer">
-    <h2>Prayer Request</h2>
-    <form>
-        <input type="text" placeholder="Your Name" required><br>
-        <input type="email" placeholder="Your Email" required><br>
-        <textarea rows="5" placeholder="Your Prayer Request"></textarea><br>
-        <button type="submit" class="btn">Submit</button>
-    </form>
-</section>
-
-<footer>
-    <p>&copy; 2025 True Life Family & Worship Ministries | All Rights Reserved</p>
-</footer>
 
 </body>
 </html>
